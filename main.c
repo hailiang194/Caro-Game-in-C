@@ -7,7 +7,7 @@
 
 int main()
 {
-	int board[WIDTH][HEIGHT] = {0};
+	int board[HEIGHT][WIDTH] = {0};
 	int *isX = (int *)malloc(sizeof(int));
 
 	setup(board, isX);
