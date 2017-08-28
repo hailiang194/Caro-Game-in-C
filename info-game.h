@@ -2,10 +2,10 @@
 	#define INFO_GAME_H_
 
 
-//Define board as board[y][x]
+//Define board as board[x][y]
 
-#define HEIGHT 16
-#define WIDTH 16
+#define HEIGHT 20
+#define WIDTH 20
 
 #define X_MARK 1
 #define O_MARK 0
