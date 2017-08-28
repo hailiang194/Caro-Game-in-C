@@ -1,14 +1,18 @@
 #ifndef PROCESS_IN_GAME_H_
 	#define PROCESS_IN_GAME_H_
 
+#include <stdio.h>
+
 #include "info-game.h"
+#include "logic-in-game.h"
 
-void setup(int board[WIDTH][HEIGHT], int *isX);
+void setup(int board[HEIGHT][WIDTH], int *isX);
 char present_char(int num);
-void game_scence(const int board[WIDTH][HEIGHT]);
+void game_scence(const int board[HEIGHT][WIDTH]);
 
+void control(int board[HEIGHT][WIDTH], int *isX);
 
-void setup(int board[WIDTH][HEIGHT], int *isX)
+void setup(int board[HEIGHT][WIDTH], int *isX)
 {
 	for(int i = 0; i < WIDTH; i++)
 		for(int j = 0; j < HEIGHT; j++)
@@ -26,7 +30,7 @@ char present_char(int num)
 }
 
 
-void game_scence(const int board[WIDTH][HEIGHT])
+void game_scence(const int board[HEIGHT][WIDTH])
 {
 	//print head row
 	printf("  ");
@@ -37,15 +41,15 @@ void game_scence(const int board[WIDTH][HEIGHT])
 	printf("\n");
 
 	//print inside
-	for(int i = 0; i < HEIGHT; i++)
+	for(int y = 0; y < HEIGHT; y++)
 	{
-		printf("%c ", present_char(i));
-		for(int j = 0; j < WIDTH; j++)
-			if(board[i][j] == NONE_MARK)
+		printf("%c ", present_char(y));
+		for(int x = 0; x < WIDTH; x++)
+			if(board[x][y] == NONE_MARK)
 				printf("- ");
-			else if(board[i][j] == X_MARK)
+			else if(board[x][y] == X_MARK)
 				printf("X ");
-			else if(board[i][j] == O_MARK)
+			else if(board[x][y] == O_MARK)
 				printf("O ");
 
 		printf("\n");
