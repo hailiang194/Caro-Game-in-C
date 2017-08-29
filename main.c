@@ -3,6 +3,7 @@
 
 #include "info-game.h"
 #include "process-in-game.h"
+#include "check-overline.h"
 
 void show_game_scene(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY);
 
@@ -16,7 +17,16 @@ int main()
 
 	setup(board, isX, lastX, lastY);
 
-	show_game_scene(board, isX, lastX, lastY);
+	//show_game_scene(board, isX, lastX, lastY);
+
+	board[5][5] = X_MARK;
+	board[5][6] = X_MARK;
+	board[5][7] = X_MARK;
+	board[5][8] = X_MARK;
+	board[5][9] = X_MARK;
+	board[5][10] = X_MARK;
+	
+	get_num_by_horizontal_bottom(board, 5, 5);
 	return 0;
 }
 
