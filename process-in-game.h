@@ -2,36 +2,36 @@
 	#define PROCESS_IN_GAME_H_
 
 #include <stdio.h>
+#include <ctype.h>
+#include <conio.h>
 
 #include "info-game.h"
 #include "logic-in-game.h"
+#include "process-char.h"
 
-void setup(int board[HEIGHT][WIDTH], int *isX);
-char present_char(int num);
+void setup(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY);
+
 void game_scence(const int board[HEIGHT][WIDTH]);
+void control(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY);
 
-void control(int board[HEIGHT][WIDTH], int *isX);
+void update(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY);
 
-void setup(int board[HEIGHT][WIDTH], int *isX)
+void setup(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY)
 {
 	for(int i = 0; i < WIDTH; i++)
 		for(int j = 0; j < HEIGHT; j++)
 			board[i][j] = NONE_MARK;
 
 	*isX = TRUE;
+
+	//that mean nothing
+	*lastX = -1;
+	*lastY = -1;
 }
-
-char present_char(int num)
-{
-	if(num < 10)
-		return num + '0';
-
-	return PRESENT_ALPHABET[(num % 10) % NUM_PRESENT];
-}
-
 
 void game_scence(const int board[HEIGHT][WIDTH])
 {
+	system("cls");
 	//print head row
 	printf("  ");
 
@@ -56,4 +56,36 @@ void game_scence(const int board[HEIGHT][WIDTH])
 	}
 }
 
+void control(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY)
+{
+	//Input X and Y
+	printf("> ");
+	char presentX, presentY;
+	fflush(stdin);
+	scanf("%c", &presentX);
+	scanf("%c", &presentY);
+
+	int x = get_present_number(presentX);
+	int y = get_present_number(presentY);
+
+	if(!is_true_mark_place(board, x, y))
+		return;
+	//else
+	if(*isX)
+		board[x][y] = X_MARK;
+	else if(!*isX)
+		board[x][y] = O_MARK;
+
+	*lastX = x;
+	*lastY = y;
+
+	*isX = !(*isX);
+
+}
+
+void update(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY)
+{
+	game_scence(board);
+	control(board, isX, lastX, lastY);
+}
 #endif
