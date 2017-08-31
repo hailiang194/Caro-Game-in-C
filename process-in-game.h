@@ -59,7 +59,7 @@ void game_scence(const int board[HEIGHT][WIDTH])
 void control(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY)
 {
 	//Input X and Y
-	printf("> ");
+	printf("(XY)> ");
 	char presentX, presentY;
 	fflush(stdin);
 	scanf("%c", &presentX);
