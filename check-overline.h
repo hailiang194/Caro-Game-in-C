@@ -122,8 +122,61 @@ int is_win_by_vertical(const int board[HEIGHT][WIDTH], int lastX, int lastY)
 	return (get_num_by_vertical_left(board, lastX, lastY) + get_num_by_vertical_right(board, lastX, lastY) >= 4);
 }
 
+int get_num_by_diagonal_from_left_top(const int board[HEIGHT][WIDTH], int lastX, int lastY)
+{
+	//equation : x - y + c = 0
+	int c = lastY - lastX;
+	int result = 0;
+
+	for(int i = 1; i < 5; i++)
+	{
+		if(is_out_of_board(lastX - i, lastX - i + c))
+			break;
+		if(board[lastX - i + 1][lastX - i + 1 + c] != board[lastX - i][lastX - i + c])
+			break;
+
+		result++;
+	} 
+
+	return result;
+}
+
+int get_num_by_diagonal_from_left_bottom(const int board[HEIGHT][WIDTH], int lastX, int lastY)
+{
+	if(board[lastX][lastX] == NONE_MARK)
+		return 0;
+	
+	//equation : x - y + c = 0
+	int c = lastY - lastX;
+	int result = 0;
+
+	for(int i = 1; i < 5; i++)
+	{
+		if(is_out_of_board(lastX + i, lastX + i + c))
+			break;
+		if(board[lastX + i - 1][lastX + i - 1 + c] != board[lastX + i][lastX + i + c])
+			break;
+
+		result++;
+	}
+
+	return result;
+}
+
+int is_win_by_diagonal_from_left(const int board[HEIGHT][WIDTH], int lastX, int lastY)
+{
+	return (get_num_by_diagonal_from_left_top(board, lastX, lastY) + get_num_by_diagonal_from_left_bottom(board, lastX, lastY) >= 4);
+}
+
+
+int is_win_by_diagonal(const int board[HEIGHT][WIDTH], int lastX, int lastY)
+{
+	return is_win_by_diagonal_from_left(board, lastX, lastY);
+}
+
 int have_winner(const int board[HEIGHT][WIDTH], int lastX, int lastY)
 {
-	return (is_win_by_horizontal(board, lastX, lastY) || is_win_by_vertical(board, lastX, lastY));
+	return (is_win_by_horizontal(board, lastX, lastY) || is_win_by_vertical(board, lastX, lastY) || is_win_by_diagonal(board, lastX, lastY));
 }
+
 #endif
