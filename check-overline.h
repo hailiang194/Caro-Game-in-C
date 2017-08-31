@@ -41,7 +41,6 @@ int can_place(const int board[HEIGHT][WIDTH],int x, int y)
 	return (board[x][y] == NONE_MARK);
 }
 
-
 int get_num_by_horizontal_top(const int board[HEIGHT][WIDTH], int lastX, int lastY)
 {
 	int result = 0;
