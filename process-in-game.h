@@ -85,7 +85,13 @@ void control(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY)
 
 void update(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY)
 {
+	while(!is_game_over(board, *lastX, *lastY))
+	{
+		game_scence(board);
+		control(board, isX, lastX, lastY);
+	}
+
 	game_scence(board);
-	control(board, isX, lastX, lastY);
 }
+
 #endif
