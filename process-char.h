@@ -11,6 +11,7 @@ int get_present_number(char present)
 		return present - '0';
 
 	//if present is not digit
+	present = toupper(present);
 	return (present - 'A') + 10;
 }
 
