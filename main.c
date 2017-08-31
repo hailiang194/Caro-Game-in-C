@@ -5,6 +5,7 @@
 #include "info-game.h"
 #include "process-in-game.h"
 #include "check-overline.h"
+#include "process-char.h"
 
 void show_game_scene(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY);
 
@@ -16,18 +17,16 @@ int main()
 	int *lastX = (int *)malloc(sizeof(int));
 	int *lastY = (int *)malloc(sizeof(int));
 
-	setup(board, isX, lastX, lastY);
+		setup(board, isX, lastX, lastY);
 
-	show_game_scene(board, isX, lastX, lastY);
+		show_game_scene(board, isX, lastX, lastY);
+		getch();
 	return 0;
 }
 
 void show_game_scene(int board[HEIGHT][WIDTH], int *isX, int *lastX, int *lastY)
 {
-	while(!is_game_over(board, *lastX, *lastY))
-		update(board, isX, lastX, lastY);
-
-	system("cls");
+	update(board, isX, lastX, lastY);
 
 	*isX = !(*isX);
 
